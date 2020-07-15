@@ -183,4 +183,9 @@ public class PluginMain extends Plugin {
     public void showResultOnLabel(String result, JLabel label, boolean isChosen) {
 
     }
+
+    @Override
+    public String getAuthor() {
+        return null;
+    }
 }
