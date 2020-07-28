@@ -34,6 +34,15 @@ public class PluginMain extends Plugin {
     }
 
     /**
+     * Do Not Remove, this is used for File-Engine to clear results to prepare for the next time.
+     * @see #addToResultQueue(String)
+     * @see #pollFromResultQueue()
+     */
+    public void clearResultQueue() {
+        _clearResultQueue();
+    }
+
+    /**
      * When the search bar textChanged, this function will be called.
      * @param text
      * Example : When you input "&gt;examplePlugin TEST" to the search bar, the param will be "TEST"

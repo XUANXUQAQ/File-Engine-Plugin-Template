@@ -19,6 +19,10 @@ public abstract class Plugin {
         messageQueue.add(messages);
     }
 
+    public void _clearResultQueue() {
+        resultQueue.clear();
+    }
+
     protected int _getApiVersion() {
         return API_VERSION;
     }
