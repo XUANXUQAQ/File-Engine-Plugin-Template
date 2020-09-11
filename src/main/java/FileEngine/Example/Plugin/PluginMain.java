@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class PluginMain extends Plugin {
+    private int defaultColor;
+    private int choseLabelColor;
+
     /**
      * Do Not Remove, this is used for File-Engine to get message from the plugin.
      * You can show message using "displayMessage(String caption, String message)"
@@ -40,6 +43,20 @@ public class PluginMain extends Plugin {
      */
     public void clearResultQueue() {
         _clearResultQueue();
+    }
+
+    /**
+     * Do Not Remove, this is used for File-Engine to tell the plugin the current Theme settings.
+     * You can use them on method showResultOnLabel(String, JLabel, boolean).
+     * When the label is chosen by user, you could set the label background as chosenLabelColor.
+     * When the label isn't chosen by user, you could set the label background as defaultColor.
+     * @see #showResultOnLabel(String, JLabel, boolean)
+     * @param defaultColor When the label isn't chosen, it will be shown as this color.
+     * @param choseLabelColor When the label is chosen, it will be shown as this color.
+     */
+    public void setCurrentTheme(int defaultColor, int choseLabelColor) {
+        this.defaultColor = defaultColor;
+        this.choseLabelColor = choseLabelColor;
     }
 
     /**
