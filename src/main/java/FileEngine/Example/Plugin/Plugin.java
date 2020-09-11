@@ -66,4 +66,6 @@ public abstract class Plugin {
     public abstract void showResultOnLabel(String result, JLabel label, boolean isChosen);
 
     public abstract String getAuthor();
+
+    public abstract void setCurrentTheme(int defaultColor, int choseLabelColor);
 }

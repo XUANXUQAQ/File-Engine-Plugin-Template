@@ -5,8 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class PluginMain extends Plugin {
-    private int defaultColor;
-    private int choseLabelColor;
 
     /**
      * Do Not Remove, this is used for File-Engine to get message from the plugin.
@@ -55,8 +53,7 @@ public class PluginMain extends Plugin {
      * @param choseLabelColor When the label is chosen, it will be shown as this color.
      */
     public void setCurrentTheme(int defaultColor, int choseLabelColor) {
-        this.defaultColor = defaultColor;
-        this.choseLabelColor = choseLabelColor;
+
     }
 
     /**
