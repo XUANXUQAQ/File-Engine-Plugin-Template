@@ -44,13 +44,15 @@ public class PluginMain extends Plugin {
     }
 
     /**
-     * Do Not Remove, this is used for File-Engine to tell the plugin the current Theme settings.
+     * This is used for File-Engine to tell the plugin the current Theme settings.
+     * This function will be called when the plugin is being loaded.
      * You can use them on method showResultOnLabel(String, JLabel, boolean).
      * When the label is chosen by user, you could set the label background as chosenLabelColor.
      * When the label isn't chosen by user, you could set the label background as defaultColor.
+     * You can save the color and use it at function showResultOnLabel(String, JLabel, boolean)
      * @see #showResultOnLabel(String, JLabel, boolean)
-     * @param defaultColor When the label isn't chosen, it will be shown as this color.
-     * @param choseLabelColor When the label is chosen, it will be shown as this color.
+     * @param defaultColor This is the color's RGB code. When the label isn't chosen, it will be shown as this color.
+     * @param choseLabelColor This is the color's RGB code. When the label is chosen, it will be shown as this color.
      */
     public void setCurrentTheme(int defaultColor, int choseLabelColor) {
 
