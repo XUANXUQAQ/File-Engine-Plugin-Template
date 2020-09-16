@@ -54,7 +54,7 @@ public class PluginMain extends Plugin {
      * @param defaultColor This is the color's RGB code. When the label isn't chosen, it will be shown as this color.
      * @param choseLabelColor This is the color's RGB code. When the label is chosen, it will be shown as this color.
      */
-    public void setCurrentTheme(int defaultColor, int choseLabelColor) {
+    public void setCurrentTheme(int defaultColor, int choseLabelColor, int borderColor) {
 
     }
 

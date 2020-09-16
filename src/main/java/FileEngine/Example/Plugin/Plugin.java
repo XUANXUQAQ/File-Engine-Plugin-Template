@@ -67,5 +67,5 @@ public abstract class Plugin {
 
     public abstract String getAuthor();
 
-    public abstract void setCurrentTheme(int defaultColor, int choseLabelColor);
+    public abstract void setCurrentTheme(int defaultColor, int choseLabelColor, int borderColor);
 }
