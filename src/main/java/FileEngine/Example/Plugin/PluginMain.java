@@ -182,7 +182,7 @@ public class PluginMain extends Plugin {
      * @see #getUpdateURL()
      */
     @Override
-    public boolean isLatest() {
+    public boolean isLatest() throws Exception {
         return false;
     }
 

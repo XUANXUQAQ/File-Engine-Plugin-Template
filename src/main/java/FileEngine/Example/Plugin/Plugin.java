@@ -59,7 +59,7 @@ public abstract class Plugin {
 
     public abstract String getDescription();
 
-    public abstract boolean isLatest();
+    public abstract boolean isLatest() throws Exception;
 
     public abstract String getUpdateURL();
 
