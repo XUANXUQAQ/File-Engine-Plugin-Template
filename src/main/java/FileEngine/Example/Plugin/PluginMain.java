@@ -57,8 +57,10 @@ public class PluginMain extends Plugin {
      * @see #showResultOnLabel(String, JLabel, boolean)
      * @param defaultColor This is the color's RGB code. When the label isn't chosen, it will be shown as this color.
      * @param choseLabelColor This is the color's RGB code. When the label is chosen, it will be shown as this color.
+     * @param borderColor This is the border color of File-Engine, it is deprecated, you should not set labels' border in plugin.
+     *                    However, you can still know the border color through this parameter.
      */
-    public void setCurrentTheme(int defaultColor, int choseLabelColor, int borderColor) {
+    public void setCurrentTheme(int defaultColor, int choseLabelColor,@Deprecated int borderColor) {
 
     }
 
