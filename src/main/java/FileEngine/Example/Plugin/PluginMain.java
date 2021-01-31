@@ -188,6 +188,7 @@ public class PluginMain extends Plugin {
      * @see #getUpdateURL()
      */
     @Override
+    @SuppressWarnings({"unused", "RedundantThrows"})
     public boolean isLatest() throws Exception {
         return false;
     }
