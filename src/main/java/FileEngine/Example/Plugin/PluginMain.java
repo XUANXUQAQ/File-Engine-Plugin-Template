@@ -12,6 +12,7 @@ public class PluginMain extends Plugin {
      * @return String[2], the first string is caption, the second string is message.
      * @see #displayMessage(String, String)
      */
+    @SuppressWarnings("unused")
     public String[] getMessage() {
         return _getMessage();
     }
@@ -22,6 +23,7 @@ public class PluginMain extends Plugin {
      * @see #addToResultQueue(String)
      * @return result
      */
+    @SuppressWarnings("unused")
     public String pollFromResultQueue() {
         return _pollFromResultQueue();
     }
@@ -30,6 +32,7 @@ public class PluginMain extends Plugin {
      * Do Not Remove, this is used for File-Engine to check the API version.
      * @return Api version
      */
+    @SuppressWarnings("unused")
     public int getApiVersion() {
         return _getApiVersion();
     }
@@ -39,6 +42,7 @@ public class PluginMain extends Plugin {
      * @see #addToResultQueue(String)
      * @see #pollFromResultQueue()
      */
+    @SuppressWarnings("unused")
     public void clearResultQueue() {
         _clearResultQueue();
     }
@@ -203,6 +207,8 @@ public class PluginMain extends Plugin {
      * @param label The label to be displayed.
      * @param isChosen If the label is being selected.
      *                 If so, you are supposed to set the label at a different background.
+     *
+     * You can only set the icon, text and background of this label, please do not set other attributes, such as borders...
      */
     @Override
     public void showResultOnLabel(String result, JLabel label, boolean isChosen) {
