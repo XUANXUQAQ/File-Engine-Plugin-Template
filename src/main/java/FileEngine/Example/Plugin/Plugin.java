@@ -73,4 +73,6 @@ public abstract class Plugin {
     public abstract void setCurrentTheme(int defaultColor, int choseLabelColor, int borderColor);
 
     public abstract void searchBarVisible(String showingMode);
+
+    public abstract void configsChanged(Map<String, Object> configs);
 }

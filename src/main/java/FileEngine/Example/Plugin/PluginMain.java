@@ -49,8 +49,11 @@ public class PluginMain extends Plugin {
     }
 
     /**
-     * Deprecated You should load the theme by loadPlugin
+     * Deprecated
+     * You should load the theme by loadPlugin and update the theme by configsChanged
+     *
      * @see #loadPlugin(Map)
+     * @see #configsChanged(Map)
      * This is used for File-Engine to tell the plugin the current Theme settings.
      * This function will be called when the plugin is being loaded.
      * You can use them on method showResultOnLabel(String, JLabel, boolean).
@@ -66,6 +69,15 @@ public class PluginMain extends Plugin {
     @Override
     @Deprecated
     public void setCurrentTheme(int defaultColor, int choseLabelColor, int borderColor) {
+
+    }
+
+    /**
+     * When the configuration file of File-Engine is updated, this function will be called.
+     * @param configs configs
+     */
+    @Override
+    public void configsChanged(Map<String, Object> configs) {
 
     }
 
@@ -89,7 +101,9 @@ public class PluginMain extends Plugin {
     }
 
     /**
-     * Deprecated You should use loadPlugin with configs
+     * Deprecated
+     * You should use loadPlugin with configs
+     *
      * @see #loadPlugin(Map)
      * When File-Engine is starting, the function will be called.
      * You can initialize your plugin here
