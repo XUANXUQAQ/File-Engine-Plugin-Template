@@ -3,6 +3,7 @@ package FileEngine.Example.Plugin;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.Map;
 
 public class PluginMain extends Plugin {
 
@@ -48,6 +49,8 @@ public class PluginMain extends Plugin {
     }
 
     /**
+     * Deprecated You should load the theme by loadPlugin
+     * @see #loadPlugin(Map)
      * This is used for File-Engine to tell the plugin the current Theme settings.
      * This function will be called when the plugin is being loaded.
      * You can use them on method showResultOnLabel(String, JLabel, boolean).
@@ -60,7 +63,9 @@ public class PluginMain extends Plugin {
      * @param borderColor This is the border color of File-Engine, it is deprecated, you should not set labels' border in plugin.
      *                    However, you can still know the border color through this parameter.
      */
-    public void setCurrentTheme(int defaultColor, int choseLabelColor,@Deprecated int borderColor) {
+    @Override
+    @Deprecated
+    public void setCurrentTheme(int defaultColor, int choseLabelColor, int borderColor) {
 
     }
 
@@ -79,6 +84,18 @@ public class PluginMain extends Plugin {
      * You can initialize your plugin here
      */
     @Override
+    public void loadPlugin(Map<String, Object> configs) {
+
+    }
+
+    /**
+     * Deprecated You should use loadPlugin with configs
+     * @see #loadPlugin(Map)
+     * When File-Engine is starting, the function will be called.
+     * You can initialize your plugin here
+     */
+    @Override
+    @Deprecated
     public void loadPlugin() {
 
     }
@@ -141,6 +158,11 @@ public class PluginMain extends Plugin {
      */
     @Override
     public void mouseReleased(MouseEvent e, String result) {
+
+    }
+
+    @Override
+    public void searchBarVisible(String showingMode) {
 
     }
 
