@@ -49,6 +49,15 @@ public class PluginMain extends Plugin {
     }
 
     /**
+     * Do Not Remove
+     * @return Event
+     */
+    @SuppressWarnings("unused")
+    public Object[] pollFromEventQueue() {
+        return _pollFromEventQueue();
+    }
+
+    /**
      * Deprecated
      * You should load the theme by loadPlugin and update the theme by configsChanged
      *
@@ -257,5 +266,18 @@ public class PluginMain extends Plugin {
     @Override
     public String getAuthor() {
         return null;
+    }
+
+
+    /**
+     * Broadcast the current processing event.
+     * You can send an event to File-Engine by sendEventToFileEngine(String eventFullClassPath, Object... params)
+     * @see #sendEventToFileEngine(String, Object...)
+     * @param c event class
+     * @param eventInstance event instance
+     */
+    @Override
+    public void eventProcessed(Class<?> c, Object eventInstance) {
+
     }
 }

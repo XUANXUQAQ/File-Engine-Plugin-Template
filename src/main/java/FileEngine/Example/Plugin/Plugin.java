@@ -9,7 +9,24 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public abstract class Plugin {
     private final ConcurrentLinkedQueue<String> resultQueue = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<String[]> messageQueue = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Object[]> eventQueue = new ConcurrentLinkedQueue<>();
     private static final int API_VERSION = 5;
+
+    protected void _clearResultQueue() {
+        resultQueue.clear();
+    }
+    protected int _getApiVersion() {
+        return API_VERSION;
+    }
+    protected String _pollFromResultQueue() {
+        return resultQueue.poll();
+    }
+    protected String[] _getMessage() {
+        return messageQueue.poll();
+    }
+    protected Object[] _pollFromEventQueue() {
+        return eventQueue.poll();
+    }
 
     public void addToResultQueue(String result) {
         resultQueue.add(result);
@@ -20,18 +37,11 @@ public abstract class Plugin {
         messageQueue.add(messages);
     }
 
-    public void _clearResultQueue() {
-        resultQueue.clear();
-    }
-
-    protected int _getApiVersion() {
-        return API_VERSION;
-    }
-    protected String _pollFromResultQueue() {
-        return resultQueue.poll();
-    }
-    protected String[] _getMessage() {
-        return messageQueue.poll();
+    public void sendEventToFileEngine(String eventFullClassPath, Object... params) {
+        Object[] event = new Object[2];
+        event[0] = eventFullClassPath;
+        event[1] = params;
+        eventQueue.add(event);
     }
 
 
@@ -75,4 +85,6 @@ public abstract class Plugin {
     public abstract void searchBarVisible(String showingMode);
 
     public abstract void configsChanged(Map<String, Object> configs);
+
+    public abstract void eventProcessed(Class<?> c, Object eventInstance);
 }
