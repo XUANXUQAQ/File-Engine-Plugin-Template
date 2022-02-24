@@ -49,7 +49,12 @@ public class PluginMain extends Plugin {
     }
 
     /**
-     * Do Not Remove
+     * Do Not Remove, this is used for File-Engine to poll the event that send from the plugin.
+     * The object array contains two parts.
+     * object[0] contains the fully-qualified name of class.
+     * object[1] contains the params that the event need to build an instance.
+     * To send an event to File-Engine
+     * @see #sendEventToFileEngine(String, Object...)
      * @return Event
      */
     @SuppressWarnings("unused")
