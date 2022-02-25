@@ -8,61 +8,6 @@ import java.util.Map;
 public class PluginMain extends Plugin {
 
     /**
-     * Do Not Remove, this is used for File-Engine to get message from the plugin.
-     * You can show message using "displayMessage(String caption, String message)"
-     * @return String[2], the first string is caption, the second string is message.
-     * @see #displayMessage(String, String)
-     */
-    @SuppressWarnings("unused")
-    public String[] getMessage() {
-        return _getMessage();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to get results from the plugin
-     * You can add result using "addToResultQueue(String result)".
-     * @see #addToResultQueue(String)
-     * @return result
-     */
-    @SuppressWarnings("unused")
-    public String pollFromResultQueue() {
-        return _pollFromResultQueue();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to check the API version.
-     * @return Api version
-     */
-    @SuppressWarnings("unused")
-    public int getApiVersion() {
-        return _getApiVersion();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to clear results to prepare for the next time.
-     * @see #addToResultQueue(String)
-     * @see #pollFromResultQueue()
-     */
-    @SuppressWarnings("unused")
-    public void clearResultQueue() {
-        _clearResultQueue();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to poll the event that send from the plugin.
-     * The object array contains two parts.
-     * object[0] contains the fully-qualified name of class.
-     * object[1] contains the params that the event need to build an instance.
-     * To send an event to File-Engine
-     * @see #sendEventToFileEngine(String, Object...)
-     * @return Event
-     */
-    @SuppressWarnings("unused")
-    public Object[] pollFromEventQueue() {
-        return _pollFromEventQueue();
-    }
-
-    /**
      * Deprecated
      * You should load the theme by loadPlugin and update the theme by configsChanged
      *
@@ -284,5 +229,61 @@ public class PluginMain extends Plugin {
     @Override
     public void eventProcessed(Class<?> c, Object eventInstance) {
 
+    }
+
+
+    /**
+     * Do Not Remove, this is used for File-Engine to get message from the plugin.
+     * You can show message using "displayMessage(String caption, String message)"
+     * @return String[2], the first string is caption, the second string is message.
+     * @see #displayMessage(String, String)
+     */
+    @SuppressWarnings("unused")
+    public String[] getMessage() {
+        return _getMessage();
+    }
+
+    /**
+     * Do Not Remove, this is used for File-Engine to get results from the plugin
+     * You can add result using "addToResultQueue(String result)".
+     * @see #addToResultQueue(String)
+     * @return result
+     */
+    @SuppressWarnings("unused")
+    public String pollFromResultQueue() {
+        return _pollFromResultQueue();
+    }
+
+    /**
+     * Do Not Remove, this is used for File-Engine to check the API version.
+     * @return Api version
+     */
+    @SuppressWarnings("unused")
+    public int getApiVersion() {
+        return _getApiVersion();
+    }
+
+    /**
+     * Do Not Remove, this is used for File-Engine to clear results to prepare for the next time.
+     * @see #addToResultQueue(String)
+     * @see #pollFromResultQueue()
+     */
+    @SuppressWarnings("unused")
+    public void clearResultQueue() {
+        _clearResultQueue();
+    }
+
+    /**
+     * Do Not Remove, this is used for File-Engine to poll the event that send from the plugin.
+     * The object array contains two parts.
+     * object[0] contains the fully-qualified name of class.
+     * object[1] contains the params that the event need to build an instance.
+     * To send an event to File-Engine
+     * @see #sendEventToFileEngine(String, Object...)
+     * @return Event
+     */
+    @SuppressWarnings("unused")
+    public Object[] pollFromEventQueue() {
+        return _pollFromEventQueue();
     }
 }

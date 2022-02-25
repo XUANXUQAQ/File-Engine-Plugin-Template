@@ -10,7 +10,7 @@ public abstract class Plugin {
     private final ConcurrentLinkedQueue<String> resultQueue = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<String[]> messageQueue = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Object[]> eventQueue = new ConcurrentLinkedQueue<>();
-    private static final int API_VERSION = 5;
+    private static final int API_VERSION = 6;
 
     protected void _clearResultQueue() {
         resultQueue.clear();
