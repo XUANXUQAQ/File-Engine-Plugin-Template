@@ -12,6 +12,10 @@ public class PluginMain extends Plugin {
      * Deprecated
      * You should load the theme by loadPlugin and update the theme by configsChanged
      *
+     * @param defaultColor    This is the color's RGB code. When the label isn't chosen, it will be shown as this color.
+     * @param choseLabelColor This is the color's RGB code. When the label is chosen, it will be shown as this color.
+     * @param borderColor     This is the border color of File-Engine, it is deprecated, you should not set labels' border in plugin.
+     *                        However, you can still know the border color through this parameter.
      * @see #loadPlugin(Map)
      * @see #configsChanged(Map)
      * This is used for File-Engine to tell the plugin the current Theme settings.
@@ -21,10 +25,6 @@ public class PluginMain extends Plugin {
      * When the label isn't chosen by user, you could set the label background as defaultColor.
      * You can save the color and use it at function showResultOnLabel(String, JLabel, boolean)
      * @see #showResultOnLabel(String, JLabel, boolean)
-     * @param defaultColor This is the color's RGB code. When the label isn't chosen, it will be shown as this color.
-     * @param choseLabelColor This is the color's RGB code. When the label is chosen, it will be shown as this color.
-     * @param borderColor This is the border color of File-Engine, it is deprecated, you should not set labels' border in plugin.
-     *                    However, you can still know the border color through this parameter.
      */
     @Override
     @Deprecated
@@ -34,6 +34,7 @@ public class PluginMain extends Plugin {
 
     /**
      * When the configuration file of File-Engine is updated, this function will be called.
+     *
      * @param configs configs
      */
     @Override
@@ -43,8 +44,8 @@ public class PluginMain extends Plugin {
 
     /**
      * When the search bar textChanged, this function will be called.
-     * @param text
-     * Example : When you input "&gt;examplePlugin TEST" to the search bar, the param will be "TEST"
+     *
+     * @param text Example : When you input "&gt;examplePlugin TEST" to the search bar, the param will be "TEST"
      */
     @Override
     public void textChanged(String text) {
@@ -85,7 +86,8 @@ public class PluginMain extends Plugin {
     /**
      * Invoked when a key has been released.See the class description for the swing KeyEvent for a definition of a key released event.
      * Notice : Up and down keys will not be included (key code 38 and 40 will not be included).
-     * @param e KeyEvent, Which key on the keyboard is released.
+     *
+     * @param e      KeyEvent, Which key on the keyboard is released.
      * @param result Currently selected content.
      */
     @Override
@@ -96,7 +98,8 @@ public class PluginMain extends Plugin {
     /**
      * Invoked when a key has been pressed. See the class description for the swing KeyEvent for a definition of a key pressed event.
      * Notice : Up and down keys will not be included (key code 38 and 40 will not be included).
-     * @param e KeyEvent, Which key on the keyboard is pressed.
+     *
+     * @param e      KeyEvent, Which key on the keyboard is pressed.
      * @param result Currently selected content.
      */
     @Override
@@ -107,7 +110,8 @@ public class PluginMain extends Plugin {
     /**
      * Invoked when a key has been typed.See the class description for the swing KeyEvent for a definition of a key typed event.
      * Notice : Up and down keys will not be included (key code 38 and 40 will not be included).
-     * @param e KeyEvent, Which key on the keyboard is pressed.
+     *
+     * @param e      KeyEvent, Which key on the keyboard is pressed.
      * @param result Currently selected content.
      */
     @Override
@@ -117,7 +121,8 @@ public class PluginMain extends Plugin {
 
     /**
      * Invoked when a mouse button has been pressed on a component.
-     * @param e Mouse event
+     *
+     * @param e      Mouse event
      * @param result Currently selected content.
      */
     @Override
@@ -127,7 +132,8 @@ public class PluginMain extends Plugin {
 
     /**
      * Invoked when a mouse button has been released on a component.
-     * @param e Mouse event
+     *
+     * @param e      Mouse event
      * @param result Currently selected content
      */
     @Override
@@ -143,6 +149,7 @@ public class PluginMain extends Plugin {
     /**
      * Get the plugin Icon. It can be the png, jpg.
      * Make the icon small, or it will occupy too much memory.
+     *
      * @return icon
      */
     @Override
@@ -152,6 +159,7 @@ public class PluginMain extends Plugin {
 
     /**
      * Get the official site of the plugin.
+     *
      * @return official site
      */
     @Override
@@ -161,6 +169,7 @@ public class PluginMain extends Plugin {
 
     /**
      * Get the plugin version.
+     *
      * @return version
      */
     @Override
@@ -171,6 +180,7 @@ public class PluginMain extends Plugin {
     /**
      * Get the description of the plugin.
      * Just write the description outside, and paste it to the return value.
+     *
      * @return description
      */
     @Override
@@ -180,6 +190,7 @@ public class PluginMain extends Plugin {
 
     /**
      * Check if the current version is the latest.
+     *
      * @return true or false
      * @see #getUpdateURL()
      */
@@ -192,8 +203,9 @@ public class PluginMain extends Plugin {
     /**
      * Get the plugin download url.
      * Invoke when the isLatest() returns false;
-     * @see #isLatest()
+     *
      * @return download url
+     * @see #isLatest()
      */
     @Override
     public String getUpdateURL() {
@@ -202,12 +214,13 @@ public class PluginMain extends Plugin {
 
     /**
      * Show the content to the GUI.
-     * @param result current selected content.
-     * @param label The label to be displayed.
+     *
+     * @param result   current selected content.
+     * @param label    The label to be displayed.
      * @param isChosen If the label is being selected.
      *                 If so, you are supposed to set the label at a different background.
-     *
-     * You can only set the icon, text and background of this label, please do not set other attributes, such as borders...
+     *                 <p>
+     *                 You can only set the icon, text and background of this label, please do not set other attributes, such as borders...
      */
     @Override
     public void showResultOnLabel(String result, JLabel label, boolean isChosen) {
@@ -223,19 +236,22 @@ public class PluginMain extends Plugin {
     /**
      * Broadcast the current processing event.
      * You can send an event to File-Engine by sendEventToFileEngine(String eventFullClassPath, Object... params)
-     * @see #sendEventToFileEngine(String, Object...)
-     * @param c event class
+     *
+     * @param c             event class
      * @param eventInstance event instance
+     * @see #sendEventToFileEngine(String, Object...)
      */
     @Override
     public void eventProcessed(Class<?> c, Object eventInstance) {
 
     }
 
+    //--------------------------------------------------------------------------------------------------------------
 
     /**
      * Do Not Remove, this is used for File-Engine to get message from the plugin.
      * You can show message using "displayMessage(String caption, String message)"
+     *
      * @return String[2], the first string is caption, the second string is message.
      * @see #displayMessage(String, String)
      */
@@ -247,8 +263,9 @@ public class PluginMain extends Plugin {
     /**
      * Do Not Remove, this is used for File-Engine to get results from the plugin
      * You can add result using "addToResultQueue(String result)".
-     * @see #addToResultQueue(String)
+     *
      * @return result
+     * @see #addToResultQueue(String)
      */
     @SuppressWarnings("unused")
     public String pollFromResultQueue() {
@@ -257,6 +274,7 @@ public class PluginMain extends Plugin {
 
     /**
      * Do Not Remove, this is used for File-Engine to check the API version.
+     *
      * @return Api version
      */
     @SuppressWarnings("unused")
@@ -266,6 +284,7 @@ public class PluginMain extends Plugin {
 
     /**
      * Do Not Remove, this is used for File-Engine to clear results to prepare for the next time.
+     *
      * @see #addToResultQueue(String)
      * @see #pollFromResultQueue()
      */
@@ -280,8 +299,9 @@ public class PluginMain extends Plugin {
      * object[0] contains the fully-qualified name of class.
      * object[1] contains the params that the event need to build an instance.
      * To send an event to File-Engine
-     * @see #sendEventToFileEngine(String, Object...)
+     *
      * @return Event
+     * @see #sendEventToFileEngine(String, Object...)
      */
     @SuppressWarnings("unused")
     public Object[] pollFromEventQueue() {
@@ -293,11 +313,22 @@ public class PluginMain extends Plugin {
      * The object array contains two parts.
      * object[0] contains the fully-qualified name of class.
      * object[1] contains a consumer to hande the event.
-     * @see #replaceFileEngineEventHandler(String, BiConsumer)
+     *
      * @return Event handler
+     * @see #replaceFileEngineEventHandler(String, BiConsumer)
      */
     @SuppressWarnings("unused")
     public Object[] pollFromEventHandlerQueue() {
         return _pollEventHandlerQueue();
+    }
+
+    /**
+     * Do Not Remove, this is used for File-Engine to restore the handler which the plugin is registered.
+     *
+     * @return Event class fully-qualified name
+     */
+    @SuppressWarnings("unused")
+    public String restoreFileEngineEventHandler() {
+        return _pollFromRestoreQueue();
     }
 }

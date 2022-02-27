@@ -12,6 +12,7 @@ public abstract class Plugin {
     private final ConcurrentLinkedQueue<String[]> messageQueue = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Object[]> eventQueue = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Object[]> replaceEventHandlerQueue = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<String> restoreReplacedEventQueue = new ConcurrentLinkedQueue<>();
     private static final int API_VERSION = 6;
 
     protected void _clearResultQueue() {
@@ -31,6 +32,13 @@ public abstract class Plugin {
     }
     protected Object[] _pollEventHandlerQueue() {
         return replaceEventHandlerQueue.poll();
+    }
+    protected String _pollFromRestoreQueue() {
+        return restoreReplacedEventQueue.poll();
+    }
+
+    public void restoreFileEngineEventHandler(String classFullName) {
+        restoreReplacedEventQueue.add(classFullName);
     }
 
     public void replaceFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
