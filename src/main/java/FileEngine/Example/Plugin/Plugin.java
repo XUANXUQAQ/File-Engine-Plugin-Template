@@ -5,11 +5,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.function.BiConsumer;
 
 public abstract class Plugin {
     private final ConcurrentLinkedQueue<String> resultQueue = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<String[]> messageQueue = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<Object[]> eventQueue = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Object[]> replaceEventHandlerQueue = new ConcurrentLinkedQueue<>();
     private static final int API_VERSION = 6;
 
     protected void _clearResultQueue() {
@@ -26,6 +28,16 @@ public abstract class Plugin {
     }
     protected Object[] _pollFromEventQueue() {
         return eventQueue.poll();
+    }
+    protected Object[] _pollEventHandlerQueue() {
+        return replaceEventHandlerQueue.poll();
+    }
+
+    public void replaceFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
+        Object[] objects = new Object[2];
+        objects[0] = classFullName;
+        objects[1] = handler;
+        replaceEventHandlerQueue.add(objects);
     }
 
     public void addToResultQueue(String result) {

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class PluginMain extends Plugin {
 
@@ -285,5 +286,18 @@ public class PluginMain extends Plugin {
     @SuppressWarnings("unused")
     public Object[] pollFromEventQueue() {
         return _pollFromEventQueue();
+    }
+
+    /**
+     * Do Not Remove, this is used for File-Engine to replace the handler which the plugin is registered.
+     * The object array contains two parts.
+     * object[0] contains the fully-qualified name of class.
+     * object[1] contains a consumer to hande the event.
+     * @see #replaceFileEngineEventHandler(String, BiConsumer)
+     * @return Event handler
+     */
+    @SuppressWarnings("unused")
+    public Object[] pollFromEventHandlerQueue() {
+        return _pollEventHandlerQueue();
     }
 }
