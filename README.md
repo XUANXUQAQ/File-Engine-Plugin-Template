@@ -5,4 +5,3 @@ File-Engine : https://github.com/XUANXUQAQ/File-Engine
 You can download it and develop a plugin used on File-Engine.
 
 [Getting Started](https://github.com/XUANXUQAQ/File-Engine-Plugin-Template/wiki/Getting-Started)   
-You can refer to the plugin : [CMD Plugin](https://github.com/XUANXUQAQ/File-Engine-CMD-Plugin)
