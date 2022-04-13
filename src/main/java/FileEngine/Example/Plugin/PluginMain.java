@@ -240,6 +240,7 @@ public class PluginMain extends Plugin {
      * @param c             event class
      * @param eventInstance event instance
      * @see #sendEventToFileEngine(String, Object...)
+     * @see #sendEventToFileEngine(Event)
      */
     @Override
     public void eventProcessed(Class<?> c, Object eventInstance) {
@@ -302,6 +303,7 @@ public class PluginMain extends Plugin {
      *
      * @return Event
      * @see #sendEventToFileEngine(String, Object...)
+     * @see #sendEventToFileEngine(Event)
      */
     @SuppressWarnings("unused")
     public Object[] pollFromEventQueue() {
@@ -315,7 +317,7 @@ public class PluginMain extends Plugin {
      * object[1] contains a consumer to hande the event.
      *
      * @return Event handler
-     * @see #replaceFileEngineEventHandler(String, BiConsumer)
+     * @see #registerFileEngineEventHandler(String, BiConsumer)
      */
     @SuppressWarnings("unused")
     public Object[] pollFromEventHandlerQueue() {

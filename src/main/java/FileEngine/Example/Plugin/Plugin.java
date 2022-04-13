@@ -41,7 +41,7 @@ public abstract class Plugin {
         restoreReplacedEventQueue.add(classFullName);
     }
 
-    public void replaceFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
+    public void registerFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
         Object[] objects = new Object[2];
         objects[0] = classFullName;
         objects[1] = handler;
@@ -55,6 +55,10 @@ public abstract class Plugin {
     public void displayMessage(String caption, String message) {
         String[] messages = new String[]{caption, message};
         messageQueue.add(messages);
+    }
+
+    public void sendEventToFileEngine(Event event) {
+        sendEventToFileEngine(Event.class.getName(), event.getBlock(), event.getCallback(), event.getErrorHandler());
     }
 
     public void sendEventToFileEngine(String eventFullClassPath, Object... params) {
