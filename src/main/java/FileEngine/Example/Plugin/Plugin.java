@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.BiConsumer;
 
+@SuppressWarnings("unused")
 public abstract class Plugin {
     private final ConcurrentLinkedQueue<String> resultQueue = new ConcurrentLinkedQueue<>();
     private final ConcurrentLinkedQueue<String[]> messageQueue = new ConcurrentLinkedQueue<>();
@@ -44,49 +45,6 @@ public abstract class Plugin {
     protected String _pollFromRestoreQueue() {
         return restoreReplacedEventQueue.poll();
     }
-
-    public void restoreFileEngineEventHandler(String classFullName) {
-        restoreReplacedEventQueue.add(classFullName);
-    }
-
-    public void registerFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
-        Object[] objects = new Object[2];
-        objects[0] = classFullName;
-        objects[1] = handler;
-        replaceEventHandlerQueue.add(objects);
-    }
-
-    public void addToResultQueue(String result) {
-        resultQueue.add(result);
-    }
-
-    public void displayMessage(String caption, String message) {
-        String[] messages = new String[]{caption, message};
-        messageQueue.add(messages);
-    }
-
-    public void sendEventToFileEngine(Event event) {
-        Class<? extends Event> eventClass = event.getClass();
-        Field[] declaredFields = eventClass.getDeclaredFields();
-        LinkedHashMap<String, Object> paramsMap = new LinkedHashMap<>();
-        try {
-            for (Field declaredField : declaredFields) {
-                declaredField.setAccessible(true);
-                paramsMap.put(declaredField.getType().getName() + ":" + declaredField.getName(), declaredField.get(event));
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        sendEventToFileEngine(Event.class.getName(), event.getBlock(), event.getCallback(), event.getErrorHandler(), paramsMap);
-    }
-
-    public void sendEventToFileEngine(String eventFullClassPath, Object... params) {
-        Object[] event = new Object[2];
-        event[0] = eventFullClassPath;
-        event[1] = params;
-        eventQueue.add(event);
-    }
-
 
     //Interface
     public abstract void textChanged(String text);
@@ -130,4 +88,50 @@ public abstract class Plugin {
     public abstract void configsChanged(Map<String, Object> configs);
 
     public abstract void eventProcessed(Class<?> c, Object eventInstance);
+
+    /*---------------------------------------------------------------------------------------------------------*/
+    /*                                              以下为可使用方法                                              */
+    /*---------------------------------------------------------------------------------------------------------*/
+
+    public void restoreFileEngineEventHandler(String classFullName) {
+        restoreReplacedEventQueue.add(classFullName);
+    }
+
+    public void registerFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
+        Object[] objects = new Object[2];
+        objects[0] = classFullName;
+        objects[1] = handler;
+        replaceEventHandlerQueue.add(objects);
+    }
+
+    public void addToResultQueue(String result) {
+        resultQueue.add(result);
+    }
+
+    public void displayMessage(String caption, String message) {
+        String[] messages = new String[]{caption, message};
+        messageQueue.add(messages);
+    }
+
+    public void sendEventToFileEngine(Event event) {
+        Class<? extends Event> eventClass = event.getClass();
+        Field[] declaredFields = eventClass.getDeclaredFields();
+        LinkedHashMap<String, Object> paramsMap = new LinkedHashMap<>();
+        try {
+            for (Field declaredField : declaredFields) {
+                declaredField.setAccessible(true);
+                paramsMap.put(declaredField.getType().getName() + ":" + declaredField.getName(), declaredField.get(event));
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        sendEventToFileEngine(Event.class.getName(), event.getBlock(), event.getCallback(), event.getErrorHandler(), paramsMap);
+    }
+
+    public void sendEventToFileEngine(String eventFullClassPath, Object... params) {
+        Object[] event = new Object[2];
+        event[0] = eventFullClassPath;
+        event[1] = params;
+        eventQueue.add(event);
+    }
 }
