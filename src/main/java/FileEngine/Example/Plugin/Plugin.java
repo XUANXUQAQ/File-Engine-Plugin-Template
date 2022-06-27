@@ -93,10 +93,19 @@ public abstract class Plugin {
     /*                                              以下为可使用方法                                              */
     /*---------------------------------------------------------------------------------------------------------*/
 
+    /**
+     * 恢复File-Engine的事件处理器
+     * @param classFullName 事件类全限定名
+     */
     public void restoreFileEngineEventHandler(String classFullName) {
         restoreReplacedEventQueue.add(classFullName);
     }
 
+    /**
+     * 替换File-Engine对应事件的事件处理器
+     * @param classFullName 事件类全限定名
+     * @param handler 事件处理器
+     */
     public void registerFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
         Object[] objects = new Object[2];
         objects[0] = classFullName;
@@ -104,15 +113,28 @@ public abstract class Plugin {
         replaceEventHandlerQueue.add(objects);
     }
 
+    /**
+     * 推送结果到File-Engine
+     * @param result 结果
+     */
     public void addToResultQueue(String result) {
         resultQueue.add(result);
     }
 
+    /**
+     * 在任务通知栏显示通知
+     * @param caption 标题
+     * @param message 信息
+     */
     public void displayMessage(String caption, String message) {
         String[] messages = new String[]{caption, message};
         messageQueue.add(messages);
     }
 
+    /**
+     * 向File-Engine发送事件
+     * @param event 事件
+     */
     public void sendEventToFileEngine(Event event) {
         Class<? extends Event> eventClass = event.getClass();
         Field[] declaredFields = eventClass.getDeclaredFields();
@@ -128,6 +150,11 @@ public abstract class Plugin {
         sendEventToFileEngine(Event.class.getName(), event.getBlock(), event.getCallback(), event.getErrorHandler(), paramsMap);
     }
 
+    /**
+     * 向File-Engine发送事件
+     * @param eventFullClassPath 事件类全限定名
+     * @param params 事件类实例化所需参数
+     */
     public void sendEventToFileEngine(String eventFullClassPath, Object... params) {
         Object[] event = new Object[2];
         event[0] = eventFullClassPath;
