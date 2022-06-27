@@ -326,8 +326,9 @@ public class PluginMain extends Plugin {
 
     /**
      * Do Not Remove, this is used for File-Engine to restore the handler which the plugin is registered.
-     * @see #restoreFileEngineEventHandler(String)
+     *
      * @return Event class fully-qualified name
+     * @see #restoreFileEngineEventHandler(String)
      */
     @SuppressWarnings("unused")
     public String restoreFileEngineEventHandler() {
