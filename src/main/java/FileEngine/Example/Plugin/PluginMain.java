@@ -54,7 +54,7 @@ public class PluginMain extends Plugin {
      * 您可以在此处初始化插件
      */
     @Override
-    public void loadPlugin(Map<String, Object> configs) {
+    public void loadPlugin(Map<String, Object> configs) throws RuntimeException {
 
     }
 
