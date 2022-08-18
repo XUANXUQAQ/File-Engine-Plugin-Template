@@ -1,4 +1,4 @@
-package FileEngine.Example.Plugin;
+package file.engine.example;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

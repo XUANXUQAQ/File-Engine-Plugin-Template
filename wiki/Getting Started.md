@@ -33,7 +33,7 @@ public class PluginMain extends Plugin {
 
 ```json
 {
-  "className" : "FileEngine.Example.Plugin.PluginMain",
+  "className" : "file.engine.example.PluginMain",
   "identifier" : "example",
   "name" : "ExamplePlugin"
 }

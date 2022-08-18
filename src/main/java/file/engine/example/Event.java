@@ -1,4 +1,4 @@
-package FileEngine.Example.Plugin;
+package file.engine.example;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
