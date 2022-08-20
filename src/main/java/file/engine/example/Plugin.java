@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -95,6 +96,7 @@ public abstract class Plugin {
 
     /**
      * 恢复File-Engine的事件处理器
+     *
      * @param classFullName 事件类全限定名
      */
     public void restoreFileEngineEventHandler(String classFullName) {
@@ -103,8 +105,9 @@ public abstract class Plugin {
 
     /**
      * 替换File-Engine对应事件的事件处理器
+     *
      * @param classFullName 事件类全限定名
-     * @param handler 事件处理器
+     * @param handler       事件处理器
      */
     public void registerFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
         Object[] objects = new Object[2];
@@ -115,6 +118,7 @@ public abstract class Plugin {
 
     /**
      * 推送结果到File-Engine
+     *
      * @param result 结果
      */
     public void addToResultQueue(String result) {
@@ -123,6 +127,7 @@ public abstract class Plugin {
 
     /**
      * 在任务通知栏显示通知
+     *
      * @param caption 标题
      * @param message 信息
      */
@@ -133,6 +138,7 @@ public abstract class Plugin {
 
     /**
      * 向File-Engine发送事件
+     *
      * @param event 事件
      */
     public void sendEventToFileEngine(Event event) {
@@ -152,13 +158,50 @@ public abstract class Plugin {
 
     /**
      * 向File-Engine发送事件
+     *
      * @param eventFullClassPath 事件类全限定名
-     * @param params 事件类实例化所需参数
+     * @param params             事件类实例化所需参数
      */
     public void sendEventToFileEngine(String eventFullClassPath, Object... params) {
         Object[] event = new Object[2];
         event[0] = eventFullClassPath;
         event[1] = params;
         eventQueue.add(event);
+    }
+
+    /**
+     * 检查事件是否符合check规则，在使用File-Engine的内置事件时应该先使用该方法检查参数
+     * 由于某些版本的事件可能会有细微差别，所以应该先进行检查事件类中的Field，确保兼容性
+     * <p>
+     * 推荐在loadPlugin时就对插件所有要使用的事件进行检查
+     *
+     * @param fileEngineEventName file-engine内置类的全限定名
+     * @param fieldNameTypeMap    检查Field的类型
+     *                            map中key为Field名称，value为Field类型
+     * @see PluginMain#loadPlugin(Map)
+     */
+    public void checkEvent(String fileEngineEventName, Map<String, Class<?>> fieldNameTypeMap) {
+        Class<?> aClass;
+        try {
+            aClass = Class.forName(fileEngineEventName);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Field[] declaredFields = aClass.getDeclaredFields();
+        HashMap<String, Class<?>> fields = new HashMap<>();
+        for (Field declaredField : declaredFields) {
+            fields.put(declaredField.getName(), declaredField.getType());
+        }
+        for (Map.Entry<String, Class<?>> entry : fieldNameTypeMap.entrySet()) {
+            String k = entry.getKey();
+            Class<?> v = entry.getValue();
+            if (!fields.containsKey(k)) {
+                throw new RuntimeException("check event failed. Missing Field: " + k);
+            }
+            Class<?> realType = fields.get(k);
+            if (!v.isAssignableFrom(realType)) {
+                throw new RuntimeException("check event type failed. Field name: " + k + "  assert type: " + v + "  real type: " + realType);
+            }
+        }
     }
 }
