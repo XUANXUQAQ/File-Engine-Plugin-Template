@@ -3,7 +3,7 @@ package file.engine.example;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({"rawtypes", "unused"})
 public class Event {
     private final AtomicBoolean isBlock = new AtomicBoolean(false);
     private Consumer callback;

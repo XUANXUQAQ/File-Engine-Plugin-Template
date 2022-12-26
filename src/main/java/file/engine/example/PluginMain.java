@@ -9,27 +9,6 @@ import java.util.function.BiConsumer;
 public class PluginMain extends Plugin {
 
     /**
-     * Deprecated
-     * 您应该通过loadPlugin加载主题，并通过configsChanged更新主题
-     *
-     * @param defaultColor    这是颜色的RGB代码。JLabel未被选择时，将显示为此颜色。
-     * @param choseLabelColor 这是颜色的RGB代码。JLabel被选中时，将显示为此颜色。
-     * @param borderColor     这是文件引擎的边框颜色，不推荐使用，您不应该在插件中设置标签的边框。
-     *                        但是，您仍然可以通过此参数了解边框颜色。
-     * @see #loadPlugin(Map)
-     * @see #configsChanged(Map)
-     * 这用于File-Engine告诉插件当前的主题设置。
-     * 当用户选择JLabel时，可以将JLabel背景设置为chosenLabelColor。
-     * 当用户未选择JLabel时，可以将JLabel背景设置为defaultColor。
-     * @see #showResultOnLabel(String, JLabel, boolean)
-     */
-    @Override
-    @Deprecated
-    public void setCurrentTheme(int defaultColor, int choseLabelColor, int borderColor) {
-
-    }
-
-    /**
      * 当用户修改FIle-Engine的设置后，将调用此函数。
      *
      * @param configs configs
@@ -55,18 +34,6 @@ public class PluginMain extends Plugin {
      */
     @Override
     public void loadPlugin(Map<String, Object> configs) throws RuntimeException {
-
-    }
-
-    /**
-     * Deprecated
-     * 你应该使用loadPlugin(Map)
-     *
-     * @see #loadPlugin(Map)
-     */
-    @Override
-    @Deprecated
-    public void loadPlugin() {
 
     }
 

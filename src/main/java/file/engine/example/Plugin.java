@@ -50,8 +50,6 @@ public abstract class Plugin {
     //Interface
     public abstract void textChanged(String text);
 
-    public abstract void loadPlugin();
-
     public abstract void loadPlugin(Map<String, Object> configs);
 
     public abstract void unloadPlugin();
@@ -81,8 +79,6 @@ public abstract class Plugin {
     public abstract void showResultOnLabel(String result, JLabel label, boolean isChosen);
 
     public abstract String getAuthor();
-
-    public abstract void setCurrentTheme(int defaultColor, int choseLabelColor, int borderColor);
 
     public abstract void searchBarVisible(String showingMode);
 
