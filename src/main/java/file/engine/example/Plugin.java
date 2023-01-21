@@ -91,7 +91,7 @@ public abstract class Plugin {
     /*---------------------------------------------------------------------------------------------------------*/
 
     /**
-     * 恢复File-Engine的事件处理器
+     * 恢复File-Engine的事件处理器，或者取消注册插件事件
      *
      * @param classFullName 事件类全限定名
      */
@@ -100,7 +100,7 @@ public abstract class Plugin {
     }
 
     /**
-     * 替换File-Engine对应事件的事件处理器
+     * 替换File-Engine对应事件的事件处理器，同时也可以注册插件事件
      *
      * @param classFullName 事件类全限定名
      * @param handler       事件处理器
@@ -149,7 +149,7 @@ public abstract class Plugin {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        sendEventToFileEngine(Event.class.getName(), event.getBlock(), event.getCallback(), event.getErrorHandler(), paramsMap);
+        sendEventToFileEngine(eventClass.getName(), event.getBlock(), event.getCallback(), event.getErrorHandler(), paramsMap);
     }
 
     /**
