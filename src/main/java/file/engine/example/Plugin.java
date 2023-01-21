@@ -12,11 +12,11 @@ import java.util.function.BiConsumer;
 
 @SuppressWarnings("unused")
 public abstract class Plugin {
-    private final ConcurrentLinkedQueue<String> resultQueue = new ConcurrentLinkedQueue<>();
-    private final ConcurrentLinkedQueue<String[]> messageQueue = new ConcurrentLinkedQueue<>();
-    private final ConcurrentLinkedQueue<Object[]> eventQueue = new ConcurrentLinkedQueue<>();
-    private final ConcurrentLinkedQueue<Object[]> replaceEventHandlerQueue = new ConcurrentLinkedQueue<>();
-    private final ConcurrentLinkedQueue<String> restoreReplacedEventQueue = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<String> resultQueue = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<String[]> messageQueue = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<Object[]> eventQueue = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<Object[]> replaceEventHandlerQueue = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<String> restoreReplacedEventQueue = new ConcurrentLinkedQueue<>();
     private static final int API_VERSION = 6;
 
     protected void _clearResultQueue() {
@@ -95,7 +95,7 @@ public abstract class Plugin {
      *
      * @param classFullName 事件类全限定名
      */
-    public void restoreFileEngineEventHandler(String classFullName) {
+    public static void restoreFileEngineEventHandler(String classFullName) {
         restoreReplacedEventQueue.add(classFullName);
     }
 
@@ -105,7 +105,7 @@ public abstract class Plugin {
      * @param classFullName 事件类全限定名
      * @param handler       事件处理器
      */
-    public void registerFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
+    public static void registerFileEngineEventHandler(String classFullName, BiConsumer<Class<?>, Object> handler) {
         Object[] objects = new Object[2];
         objects[0] = classFullName;
         objects[1] = handler;
@@ -117,7 +117,7 @@ public abstract class Plugin {
      *
      * @param result 结果
      */
-    public void addToResultQueue(String result) {
+    public static void addToResultQueue(String result) {
         resultQueue.add(result);
     }
 
@@ -127,7 +127,7 @@ public abstract class Plugin {
      * @param caption 标题
      * @param message 信息
      */
-    public void displayMessage(String caption, String message) {
+    public static void displayMessage(String caption, String message) {
         String[] messages = new String[]{caption, message};
         messageQueue.add(messages);
     }
@@ -137,7 +137,7 @@ public abstract class Plugin {
      *
      * @param event 事件
      */
-    public void sendEventToFileEngine(Event event) {
+    public static void sendEventToFileEngine(Event event) {
         Class<? extends Event> eventClass = event.getClass();
         Field[] declaredFields = eventClass.getDeclaredFields();
         LinkedHashMap<String, Object> paramsMap = new LinkedHashMap<>();
@@ -158,7 +158,7 @@ public abstract class Plugin {
      * @param eventFullClassPath 事件类全限定名
      * @param params             事件类实例化所需参数
      */
-    public void sendEventToFileEngine(String eventFullClassPath, Object... params) {
+    public static void sendEventToFileEngine(String eventFullClassPath, Object... params) {
         Object[] event = new Object[2];
         event[0] = eventFullClassPath;
         event[1] = params;
@@ -176,7 +176,7 @@ public abstract class Plugin {
      *                            map中key为Field名称，value为Field类型
      * @see PluginMain#loadPlugin(Map)
      */
-    public void checkEvent(String fileEngineEventName, Map<String, Class<?>> fieldNameTypeMap) {
+    public static void checkEvent(String fileEngineEventName, Map<String, Class<?>> fieldNameTypeMap) {
         Class<?> aClass;
         try {
             aClass = Class.forName(fileEngineEventName);
