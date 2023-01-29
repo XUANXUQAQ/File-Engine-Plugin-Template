@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.BiConsumer;
@@ -139,17 +138,7 @@ public abstract class Plugin {
      */
     public static void sendEventToFileEngine(Event event) {
         Class<? extends Event> eventClass = event.getClass();
-        Field[] declaredFields = eventClass.getDeclaredFields();
-        LinkedHashMap<String, Object> paramsMap = new LinkedHashMap<>();
-        try {
-            for (Field declaredField : declaredFields) {
-                declaredField.setAccessible(true);
-                paramsMap.put(declaredField.getType().getName() + ":" + declaredField.getName(), declaredField.get(event));
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        sendEventToFileEngine(eventClass.getName(), event.getBlock(), event.getCallback(), event.getErrorHandler(), paramsMap);
+        sendEventToFileEngine(eventClass.getName(), event.getBlock(), event.getCallback(), event.getErrorHandler(), event, eventClass);
     }
 
     /**
