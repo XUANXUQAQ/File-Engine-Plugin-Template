@@ -105,9 +105,10 @@ public class PluginMain extends Plugin {
 
     /**
      * 当File-Engine的搜索框被打开该方法将会被调用一次。并不需要进入插件模式。
-     * @param showingMode 显示模式
      *
-     * 目前File-Engine有两种模式：普通显示和贴靠资源管理器显示，对应的showingMode为 NORMAL_SHOWING， EXPLORER_ATTACH
+     * @param showingMode 显示模式
+     *                    <p>
+     *                    目前File-Engine有两种模式：普通显示和贴靠资源管理器显示，对应的showingMode为 NORMAL_SHOWING， EXPLORER_ATTACH
      */
     @Override
     public void searchBarVisible(String showingMode) {
@@ -186,8 +187,8 @@ public class PluginMain extends Plugin {
      * @param result   current selected content.
      * @param label    需要显示的JLabel.
      * @param isChosen 如果当前label是目前被用户选中的，您应该将标签设置为不同的背景，背景颜色可以通过loadPlugins和configsChanged方法的参数获得。
-     *
-     * 您只能设置JLabel的图标、文本和背景，请不要设置其他属性，如border，name以及其他
+     *                 <p>
+     *                 您只能设置JLabel的图标、文本和背景，请不要设置其他属性，如border，name以及其他
      */
     @Override
     public void showResultOnLabel(String result, JLabel label, boolean isChosen) {
@@ -196,6 +197,7 @@ public class PluginMain extends Plugin {
 
     /**
      * 获取插件的作者名，将会显示在插件的设置界面。
+     *
      * @return author name
      */
     @Override
@@ -212,8 +214,13 @@ public class PluginMain extends Plugin {
      * @param eventInstance 事件实例
      * @see #sendEventToFileEngine(String, Object...)
      * @see #sendEventToFileEngine(Event)
+     *
+     * ------- deprecated -------
+     * @see #registerFileEngineEventListener(String, String, BiConsumer)
+     * @see #removeFileEngineEventListener(String, String)
      */
     @Override
+    @Deprecated
     public void eventProcessed(Class<?> c, Object eventInstance) {
 
     }
@@ -304,5 +311,28 @@ public class PluginMain extends Plugin {
     @SuppressWarnings("unused")
     public String restoreFileEngineEventHandler() {
         return _pollFromRestoreQueue();
+    }
+
+    /**
+     * Do Not Remove, this is used for File-Engine to add an event listener for this plugin.
+     * The object array contains two parts.
+     * object[0] contains the fully-qualified name of class.
+     * object[1] contains a consumer to execute when the event is finished.
+     *
+     * @return Event listener
+     */
+    @SuppressWarnings("unused")
+    public Object[] pollFromEventListenerQueue() {
+        return _pollFromEventListenerQueue();
+    }
+
+    /**
+     * Do Not Remove, this is used to remove a plugin registered event listener.
+     *
+     * @return Event class fully-qualified name
+     */
+    @SuppressWarnings("unused")
+    public String[] removeFileEngineEventListener() {
+        return _pollFromRemoveListenerQueue();
     }
 }

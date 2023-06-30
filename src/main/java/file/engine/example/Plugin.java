@@ -16,7 +16,9 @@ public abstract class Plugin {
     private static final ConcurrentLinkedQueue<Object[]> eventQueue = new ConcurrentLinkedQueue<>();
     private static final ConcurrentLinkedQueue<Object[]> replaceEventHandlerQueue = new ConcurrentLinkedQueue<>();
     private static final ConcurrentLinkedQueue<String> restoreReplacedEventQueue = new ConcurrentLinkedQueue<>();
-    private static final int API_VERSION = 6;
+    private static final ConcurrentLinkedQueue<Object[]> addEventListenerQueue = new ConcurrentLinkedQueue<>();
+    private static final ConcurrentLinkedQueue<String[]> removeEventListenerQueue = new ConcurrentLinkedQueue<>();
+    private static final int API_VERSION = 7;
 
     protected void _clearResultQueue() {
         resultQueue.clear();
@@ -44,6 +46,14 @@ public abstract class Plugin {
 
     protected String _pollFromRestoreQueue() {
         return restoreReplacedEventQueue.poll();
+    }
+
+    protected String[] _pollFromRemoveListenerQueue() {
+        return removeEventListenerQueue.poll();
+    }
+
+    protected Object[] _pollFromEventListenerQueue() {
+        return addEventListenerQueue.poll();
     }
 
     //Interface
@@ -109,6 +119,18 @@ public abstract class Plugin {
         objects[0] = classFullName;
         objects[1] = handler;
         replaceEventHandlerQueue.add(objects);
+    }
+
+    public static void registerFileEngineEventListener(String classFullName, String listenerName, BiConsumer<Class<?>, Object> listener) {
+        Object[] objects = new Object[3];
+        objects[0] = classFullName;
+        objects[1] = listenerName;
+        objects[2] = listener;
+        addEventListenerQueue.add(objects);
+    }
+
+    public static void removeFileEngineEventListener(String classFullName, String listenerName) {
+        removeEventListenerQueue.add(new String[]{classFullName, listenerName});
     }
 
     /**
