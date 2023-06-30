@@ -121,6 +121,12 @@ public abstract class Plugin {
         replaceEventHandlerQueue.add(objects);
     }
 
+    /**
+     * 添加事件监听器，类名可以为File-Engine中的事件，也可以是插件自定义事件
+     * @param classFullName 事件类全限定名
+     * @param listenerName 监听器名
+     * @param listener 监听器
+     */
     public static void registerFileEngineEventListener(String classFullName, String listenerName, BiConsumer<Class<?>, Object> listener) {
         Object[] objects = new Object[3];
         objects[0] = classFullName;
@@ -129,6 +135,11 @@ public abstract class Plugin {
         addEventListenerQueue.add(objects);
     }
 
+    /**
+     * 删除注册的事件监听器
+     * @param classFullName 事件类全限定名
+     * @param listenerName 监听器名
+     */
     public static void removeFileEngineEventListener(String classFullName, String listenerName) {
         removeEventListenerQueue.add(new String[]{classFullName, listenerName});
     }
