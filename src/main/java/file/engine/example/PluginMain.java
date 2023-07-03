@@ -214,8 +214,11 @@ public class PluginMain extends Plugin {
      * @param eventInstance 事件实例
      * @see #sendEventToFileEngine(String, Object...)
      * @see #sendEventToFileEngine(Event)
-     *
+     * <p>
+     * --------------------------
      * ------- deprecated -------
+     * --------------------------
+     * 现在可以通过registerFileEngineEventListener()函数直接对事件进行监听，不再需要该接口。但该接口仍然可以使用。
      * @see #registerFileEngineEventListener(String, String, BiConsumer)
      * @see #removeFileEngineEventListener(String, String)
      */
@@ -223,116 +226,5 @@ public class PluginMain extends Plugin {
     @Deprecated
     public void eventProcessed(Class<?> c, Object eventInstance) {
 
-    }
-
-    //--------------------------------------------------------------------------------------------------------------
-
-    /**
-     * Do Not Remove, this is used for File-Engine to get message from the plugin.
-     * You can show message using "displayMessage(String caption, String message)"
-     *
-     * @return String[2], the first string is caption, the second string is message.
-     * @see #displayMessage(String, String)
-     */
-    @SuppressWarnings("unused")
-    public String[] getMessage() {
-        return _getMessage();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to get results from the plugin
-     * You can add result using "addToResultQueue(String result)".
-     *
-     * @return result
-     * @see #addToResultQueue(String)
-     */
-    @SuppressWarnings("unused")
-    public String pollFromResultQueue() {
-        return _pollFromResultQueue();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to check the API version.
-     *
-     * @return Api version
-     */
-    @SuppressWarnings("unused")
-    public int getApiVersion() {
-        return _getApiVersion();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to clear results to prepare for the next time.
-     *
-     * @see #addToResultQueue(String)
-     * @see #pollFromResultQueue()
-     */
-    @SuppressWarnings("unused")
-    public void clearResultQueue() {
-        _clearResultQueue();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to poll the event that send from the plugin.
-     * The object array contains two parts.
-     * object[0] contains the fully-qualified name of class.
-     * object[1] contains the params that the event need to build an instance.
-     * To send an event to File-Engine
-     *
-     * @return Event
-     * @see #sendEventToFileEngine(String, Object...)
-     * @see #sendEventToFileEngine(Event)
-     */
-    @SuppressWarnings("unused")
-    public Object[] pollFromEventQueue() {
-        return _pollFromEventQueue();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to replace the handler which the plugin is registered.
-     * The object array contains two parts.
-     * object[0] contains the fully-qualified name of class.
-     * object[1] contains a consumer to hande the event.
-     *
-     * @return Event handler
-     * @see #registerFileEngineEventHandler(String, BiConsumer)
-     */
-    @SuppressWarnings("unused")
-    public Object[] pollFromEventHandlerQueue() {
-        return _pollEventHandlerQueue();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to restore the handler which the plugin is registered.
-     *
-     * @return Event class fully-qualified name
-     * @see #restoreFileEngineEventHandler(String)
-     */
-    @SuppressWarnings("unused")
-    public String restoreFileEngineEventHandler() {
-        return _pollFromRestoreQueue();
-    }
-
-    /**
-     * Do Not Remove, this is used for File-Engine to add an event listener for this plugin.
-     * The object array contains two parts.
-     * object[0] contains the fully-qualified name of class.
-     * object[1] contains a consumer to execute when the event is finished.
-     *
-     * @return Event listener
-     */
-    @SuppressWarnings("unused")
-    public Object[] pollFromEventListenerQueue() {
-        return _pollFromEventListenerQueue();
-    }
-
-    /**
-     * Do Not Remove, this is used to remove a plugin registered event listener.
-     *
-     * @return Event class fully-qualified name
-     */
-    @SuppressWarnings("unused")
-    public String[] removeFileEngineEventListener() {
-        return _pollFromRemoveListenerQueue();
     }
 }
