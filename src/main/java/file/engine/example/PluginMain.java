@@ -227,4 +227,12 @@ public class PluginMain extends Plugin {
     public void eventProcessed(Class<?> c, Object eventInstance) {
 
     }
+
+    /**
+     * 当在设置中插件页面点击设置按钮时将会触发该方法
+     */
+    @Override
+    public void openSettings() {
+
+    }
 }

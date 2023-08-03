@@ -18,7 +18,7 @@ public abstract class Plugin {
     private static final ConcurrentLinkedQueue<String> restoreReplacedEventQueue = new ConcurrentLinkedQueue<>();
     private static final ConcurrentLinkedQueue<Object[]> addEventListenerQueue = new ConcurrentLinkedQueue<>();
     private static final ConcurrentLinkedQueue<String[]> removeEventListenerQueue = new ConcurrentLinkedQueue<>();
-    private static final int API_VERSION = 7;
+    private static final int API_VERSION = 8;
 
     //Interface
     public abstract void textChanged(String text);
@@ -58,6 +58,8 @@ public abstract class Plugin {
     public abstract void configsChanged(Map<String, Object> configs);
 
     public abstract void eventProcessed(Class<?> c, Object eventInstance);
+
+    public abstract void openSettings();
 
     /*---------------------------------------------------------------------------------------------------------*/
     /*                                              以下为可使用方法                                              */
